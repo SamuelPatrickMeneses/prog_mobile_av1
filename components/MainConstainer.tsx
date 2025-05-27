@@ -3,7 +3,7 @@ import {SectionList, StatusBar, StyleSheet, View, Text, ViewProps } from 'react-
 import { Stack} from 'expo-router';
 const styles = StyleSheet.create({
     container:{
-        
+        flex: 1
     }        
 });
 type props = {

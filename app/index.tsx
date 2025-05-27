@@ -11,8 +11,14 @@ export default function App()
   const [data, setData]:any[] = useState([]);
   useEffect(() => {
     asyncStorage.getItem('item-list')
-    .then(setData)
-    .catch(() => console.log('Fail to load data in index.tsx'));
+    .then((l) => {
+        console.log(l);
+        if (l !== null) {
+            setData(JSON.parse(l));
+        } else {
+            setData([]);
+        }
+    })
   },[]);
   return (
     <MainContainer title='Home'>
@@ -21,7 +27,7 @@ export default function App()
                 <Link href={'/new'} ><Text style={styles.newButtonText}>new</Text ></Link >
             </View >
         </View >
-        <RegistreList data={data}/>
+        <RegistreList data={data.map((e: string) => ({'title': e}))} />
     </MainContainer>
   );
 }
@@ -45,7 +51,8 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.secundary,
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingVertical: 10
+    paddingVertical: 10,
+    flex: 0
   },
   newButton:{
     borderRadius: 10,
@@ -57,5 +64,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: colors.primary,
     textAlign: 'center',
+  },
+  list:{
+    flex: 1
   }
 });
