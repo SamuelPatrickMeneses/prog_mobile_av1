@@ -1,6 +1,6 @@
 import {FlatList, StatusBar, StyleSheet, View, Text } from 'react-native';
 import Icon from '@expo/vector-icons/MaterialIcons';
-import { Stack} from 'expo-router';
+import { Link, Stack} from 'expo-router';
 import colors from '@/constants/colors';
 const styles = StyleSheet.create({
     container:{
@@ -12,7 +12,14 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     itemContainer:{
-        borderColor:'black'
+        borderColor:'blak',
+        paddingVertical: 5,
+        flexDirection: 'row',
+        justifyContent: 'center',
+
+    },
+    itemContainerText:{
+        fontSize: 24   
     },
     notEmpty:{
         alignItems: 'center',
@@ -32,9 +39,13 @@ type props = {
 };
 function Item( {title}:ItemProps )
 {
-    return (<View style={styles.itemContainer}>
-        <Text>{title}</Text>
-    </View>);
+    return (
+        <View style={styles.itemContainer}>
+            <Link href={`/edit/[${atob(title)}]`}>
+                <Text style={styles.itemContainerText}>{title}</Text >
+            </Link>
+        </View>
+    );
 };
 
 export default function index({data}:props)
@@ -44,7 +55,7 @@ export default function index({data}:props)
     <View style={styles.container}>
         {
             data && data.length > 0 ? 
-                (<FlatList data={data} renderItem={({item}) => Item(item)}/>)
+                (<FlatList data={data} renderItem={({item}) => Item(item)} />)
                 : (<View style={styles.notEmpty}>
                     <Icon name={'data-array'} color={colors.secundary} size={80}></Icon >
                     <Text style={styles.notEmptyText}>No content found</Text >
