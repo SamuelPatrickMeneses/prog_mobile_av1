@@ -5,7 +5,7 @@ import RegistreList from '../components/RegistreList';
 import {useEffect, useState} from 'react';
 import asyncStorage from "@react-native-async-storage/async-storage";
 import colors from '../constants/colors';
-import {Link, router} from 'expo-router';
+import {Link, useRouter} from 'expo-router';
 
 const styles = StyleSheet.create({
   container: {
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
 
 export default function App()
 {
+  const router = useRouter(); 
   const [data, setData]:any[] = useState('');
   const [title, setTitle]:any[] = useState('');
   const [list, setList]: any[] = useState([]);
@@ -77,7 +78,7 @@ export default function App()
                         .then(() =>{ 
                             list.push(data);
                             asyncStorage.setItem('item-list', JSON.stringify(list))
-                            .then(() => console.log('lista gravada consuseso', list))
+                            .then(() => console.log('lista gravada com suseso', list))
                             .catch(() => console.log('falha ao persistir dados em new.tsx'));
                             router.back();
                         })

@@ -4,12 +4,12 @@ import RegistreList from '../components/RegistreList';
 import {useEffect, useState} from 'react';
 import asyncStorage from "@react-native-async-storage/async-storage";
 import colors from '../constants/colors';
-import {Link} from 'expo-router';
+import {Link, useFocusEffect} from 'expo-router';
 
 export default function App()
 {
   const [data, setData]:any[] = useState([]);
-  useEffect(() => {
+  useFocusEffect(() => {
     asyncStorage.getItem('item-list')
     .then((l) => {
         console.log(l);
@@ -19,7 +19,7 @@ export default function App()
             setData([]);
         }
     })
-  },[]);
+  });
   return (
     <MainContainer title='Home'>
         <View style={styles.menu}>
