@@ -22,15 +22,15 @@ Aplicativo mobile de bloco de notas desenvolvido com:
 
 ### 📜 Lista notas
 
-![Exemplo de Interface](.github/preview/list.jpg) 
+![Exemplo de Interface](https://github.com/SamuelPatrickMeneses/prog_mobile_av1/blob/master/.github/preview/list.jpg) 
 
 ### 🆕 Nova nota
 
-![Exemplo de Interface](.github/preview/new.jpg) 
+![Exemplo de Interface](https://github.com/SamuelPatrickMeneses/prog_mobile_av1/blob/master/.github/preview/new.jpg) 
 
 ### ✏️  Editar nota
 
-![Exemplo de Interface](.github/preview/edit.jpg) 
+![Exemplo de Interface](https://github.com/SamuelPatrickMeneses/prog_mobile_av1/blob/master/.github/preview/edit.jpg) 
 
 ## 🚀 Como Executar
 
