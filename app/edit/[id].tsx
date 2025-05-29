@@ -45,50 +45,35 @@ const styles = StyleSheet.create({
   titleInput: {
       backgroundColor: 'white',
       borderRadius: 10,
-      flex: 1
+      flex: 1,
+      fontSize: 24,
+      textAlign: 'center',
+      paddingVertical: 10
   }
 });
 
-export default function App()
+export default function index()
 {
-  const router = useRouter(); 
+  const [[_, id]]  = useSearchParams();
   const [data, setData]:any[] = useState('');
   const [title, setTitle]:any[] = useState('');
-  const [list, setList]: any[] = useState([]);
-  const [[_, id]]  = useSearchParams();
-  setTitle(btoa(id));
-  useFocusEffect(() => {
-    asyncStorage.getItem(btoa(id))
-    .then((d) => {
-        setData(d);   
-        asyncStorage.getItem('item-list')
-        .then((l) => {
-            if (l !== null) {
-                setList(JSON.parse(l));
-            } else {
-                setList([]);
-            }
-        })
-        .catch(() => console.log('Fail to load list data in /edit/[id]'));
-    })
+  const router = useRouter(); 
+  useEffect(() => {
+    setTitle(atob(id));
+    asyncStorage.getItem(atob(id))
+    .then(setData)
     .catch(() => console.log('Fail to load data in /edit/[id]'));
-  });
+  }, []);
   return (
     <MainContainer title='Home'>
         <View style={styles.menu}>
-            <TextInput style={styles.titleInput} value={title} onChangeText={setTitle}/>
+            <Text style={styles.titleInput}>{title}</Text>
             <TouchableHighlight 
                 style={styles.saveButton}
                 onPress={() => {
-                    const index = list.findIndex((e : any) => e === title);
-                    if (index !== -1) {
-                        asyncStorage.setItem(btoa(title), data)
-                        .then(() => router.back())
-                        .catch(() => Alert.prompt('Error!', `falha ao persistir ${btoa(title)}`));
-                    } else {
-                        Alert.prompt('Error!', 'Este titulo não existie!');
-                        router.back();
-                    }
+                    asyncStorage.setItem(title, data)
+                    .then(() => router.back())
+                    .catch(() => Alert.prompt('Error!', `falha ao persistir ${title}`));
                 }}>
                 <Text style={styles.saveButtonText}>Save</Text>
             </TouchableHighlight>
