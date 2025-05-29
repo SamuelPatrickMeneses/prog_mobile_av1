@@ -57,17 +57,11 @@ export default function App()
   const [list, setList]: any[] = useState([]);
   useEffect(() => {
     asyncStorage.getItem('item-list')
-    .then((l) => {
-        if (l !== null) {
-            setList(JSON.parse(l));
-        } else {
-            setList([]);
-        }
-    })
+    .then((l: string | null) => setList(JSON.parse(l ?? '[]')))
     .catch(() => console.log('Fail to load data in index.tsx'));
   },[]);
   return (
-    <MainContainer title='Home'>
+    <MainContainer title='New'>
         <View style={styles.menu}>
             <TextInput style={styles.titleInput} value={title} onChangeText={setTitle}/>
             <TouchableHighlight 
@@ -76,11 +70,11 @@ export default function App()
                     if (list.findIndex((e : any) => e === title) === -1) {
                         asyncStorage.setItem(title, data)
                         .then(() =>{ 
-                            list.push(data);
+                            list.push(title);
                             asyncStorage.setItem('item-list', JSON.stringify(list))
                             .then(() => console.log('lista gravada com suseso', list))
                             .catch(() => console.log('falha ao persistir dados em new.tsx'));
-                            router.back();
+                            router.replace('/');
                         })
                         .catch(() => Alert.prompt('Error!', 'Este titulo ja existie!'));
                     }
