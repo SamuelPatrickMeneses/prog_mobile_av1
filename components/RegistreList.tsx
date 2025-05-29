@@ -1,6 +1,7 @@
-import {FlatList, StatusBar, StyleSheet, View, Text } from 'react-native';
-import Icon from '@expo/vector-icons/MaterialIcons';
-import { Link, Stack} from 'expo-router';
+import {FlatList, StatusBar, StyleSheet, View, Text, Pressable } from 'react-native';
+import MaterialIcon from '@expo/vector-icons/MaterialIcons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import {Link} from 'expo-router';
 import colors from '@/constants/colors';
 const styles = StyleSheet.create({
     container:{
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
         borderColor:'blak',
         paddingVertical: 5,
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
 
     },
     itemContainerText:{
@@ -32,32 +33,37 @@ const styles = StyleSheet.create({
 
 });
 type ItemProps = {
-    title:string  
+    title:string,
+    deleteItem: (item: string) => Promise<string | void | null>
 };
 type props = {
-    data: ItemProps[] 
+    data: string[],
+    deleteItem: (item: string) => Promise<string | void | null>
 };
-function Item( {title}:ItemProps )
-{
+function Item({title, deleteItem}: ItemProps)
+{   
     return (
         <View style={styles.itemContainer}>
-            <Link href={`/edit/[${atob(title)}]`}>
+            <Link href={`/edit/${btoa(title)}`}>
                 <Text style={styles.itemContainerText}>{title}</Text >
             </Link>
+            <Pressable onPress={() => deleteItem(title)}>
+                <MaterialCommunityIcons name={'trash-can'} color={colors.secundary} size={40}/>
+            </Pressable>
         </View>
     );
 };
 
-export default function index({data}:props)
+export default function index({data, deleteItem}:props)
 {
-    
+    let items = data.map((e: string) => ({title: e, deleteItem}));
     return (
     <View style={styles.container}>
         {
             data && data.length > 0 ? 
-                (<FlatList data={data} renderItem={({item}) => Item(item)} />)
+                (<FlatList data={items} renderItem={({item}) => Item(item)} />)
                 : (<View style={styles.notEmpty}>
-                    <Icon name={'data-array'} color={colors.secundary} size={80}></Icon >
+                    <MaterialIcon name={'data-array'} color={colors.secundary} size={80}/>
                     <Text style={styles.notEmptyText}>No content found</Text >
                   </View>)
         }
