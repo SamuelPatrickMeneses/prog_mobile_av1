@@ -1,33 +1,31 @@
-import { StyleSheet, View, Text, ScrollView, Button } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Button, Pressable } from 'react-native';
 import MainContainer from '../components/MainConstainer'
 import RegistreList from '../components/RegistreList';
 import {useEffect, useState} from 'react';
 import asyncStorage from "@react-native-async-storage/async-storage";
 import colors from '../constants/colors';
-import {Link, useFocusEffect} from 'expo-router';
-
+import {Link, useRouter} from 'expo-router';
+import {deleteItem} from '../helpers/detete';
 export default function App()
 {
+  const router = useRouter();
   const [data, setData]:any[] = useState([]);
-  useFocusEffect(() => {
+  useEffect(() => {
     asyncStorage.getItem('item-list')
-    .then((l) => {
-        console.log(l);
-        if (l !== null) {
-            setData(JSON.parse(l));
-        } else {
-            setData([]);
-        }
-    })
-  });
+    .then((l: string | null) => setData(JSON.parse(l ?? '[]')));
+  },[]);
+  function delItem(i: string) {
+    return deleteItem(i)
+    .then(() => setData(data.filter((e:string) => e !== i)));
+  }
   return (
     <MainContainer title='Home'>
         <View style={styles.menu}>
-            <View style={styles.newButton}>
-                <Link href={'/new'} ><Text style={styles.newButtonText}>new</Text ></Link >
-            </View >
+            <Pressable style={styles.newButton} onPress={() => router.replace('/new')}>
+                <Text style={styles.newButtonText}>new</Text >
+            </Pressable >
         </View >
-        <RegistreList data={data.map((e: string) => ({'title': e}))} />
+        <RegistreList data={data} deleteItem={delItem}/>
     </MainContainer>
   );
 }
