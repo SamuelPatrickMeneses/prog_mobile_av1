@@ -65,7 +65,7 @@ export default function index()
     .catch(() => console.log('Fail to load data in /edit/[id]'));
   }, []);
   return (
-    <MainContainer title='Home'>
+    <MainContainer title='Edit'>
         <View style={styles.menu}>
             <Text style={styles.titleInput}>{title}</Text>
             <TouchableHighlight 
