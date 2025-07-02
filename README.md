@@ -44,12 +44,11 @@ execute com
 ```bash
 npm start
 ```
-## esplicação sobre testes 
+## explicação sobre testes
 
-### testes unitarios
-
-são testes altomatisados que verificão propriedades de pequenas unidades de codigo como funções e classes.
+### testes unitários
+são testes automatizados que verificar propriedades de pequenas unidades de código como funções e classes.
 
 ### testes E2E
 
-são testes altomatisados que verificão o funcionamento da aplicação atraves de suas interfaces(GUIs, APIs rest, etc).
+são testes automatizados que verificam o funcionamento da aplicação através de suas interfaces (GUIs, APIs rest, etc).
