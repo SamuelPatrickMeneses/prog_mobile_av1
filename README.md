@@ -44,7 +44,7 @@ execute com
 ```bash
 npm start
 ```
-## esplicação dos testes 
+## esplicação sobre testes 
 
 ### testes unitarios
 
