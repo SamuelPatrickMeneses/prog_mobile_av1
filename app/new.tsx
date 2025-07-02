@@ -63,7 +63,7 @@ export default function App()
   return (
     <MainContainer title='New'>
         <View style={styles.menu}>
-            <TextInput style={styles.titleInput} value={title} onChangeText={setTitle}/>
+            <TextInput testID='titleField' style={styles.titleInput} value={title} onChangeText={setTitle}/>
             <TouchableHighlight 
                 style={styles.saveButton}
                 onPress={() => {
@@ -82,7 +82,7 @@ export default function App()
                 <Text style={styles.saveButtonText}>Save</Text>
             </TouchableHighlight>
        </View >
-       <TextField text={data} onChangeText={setData}/>
+       <TextField testID='textField' text={data} onChangeText={setData}/>
     </MainContainer>
   );
 }

@@ -47,7 +47,7 @@ function Item({title, deleteItem}: ItemProps)
             <Link href={`/edit/${btoa(title)}`}>
                 <Text style={styles.itemContainerText}>{title}</Text >
             </Link>
-            <Pressable onPress={() => deleteItem(title)}>
+            <Pressable testID={'delete-'+title} onPress={() => deleteItem(title)}>
                 <MaterialCommunityIcons name={'trash-can'} color={colors.secundary} size={40}/>
             </Pressable>
         </View>

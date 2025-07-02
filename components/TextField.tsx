@@ -3,13 +3,15 @@ import { Button, StyleSheet, TextInput, View } from 'react-native';
 
 type props = {
     onChangeText: (text: string) => void,
-    text: string
+    text: string,
+    testID: string
 };
 
-export default function index({onChangeText, text}: props) {
+export default function index({onChangeText, text, testID}: props) {
     return (
       <View style={styles.container}  >
-          <TextInput 
+          <TextInput
+              testID={testID}
               style={styles.ti}
               value={text}
               onChangeText={onChangeText}

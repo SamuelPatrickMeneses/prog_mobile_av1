@@ -5,7 +5,7 @@ import {useEffect, useState} from 'react';
 import asyncStorage from "@react-native-async-storage/async-storage";
 import colors from '../constants/colors';
 import {Link, useRouter} from 'expo-router';
-import {deleteItem} from '../helpers/detete';
+import {deleteItem} from '../helpers/delete';
 export default function App()
 {
   const router = useRouter();

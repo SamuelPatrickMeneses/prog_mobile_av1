@@ -1,0 +1,16 @@
+appId: host.exp.exponent
+---
+- launchApp
+- tapOn: 'Enter URL manually'
+- tapOn: 'exp://'
+- inputText: 'exp://192.168.0.17:8081'  
+- tapOn: "Connect"        
+- tapOn: "new"        
+- tapOn: 
+    id: "titleField"        
+- inputText: 'titulo'  
+- tapOn:
+    id: "textField"        
+- inputText: 'texto'  
+- tapOn: "Save"        
+- assertVisible: "titulo"
